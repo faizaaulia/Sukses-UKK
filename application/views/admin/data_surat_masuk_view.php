@@ -4,6 +4,14 @@
 			<h1 class="page-header">Data Surat Masuk</h1>
 		</div>
 	</div>
+    <?php 
+        $notif = $this->session->flashdata('notif');
+        if ($notif != NULL) {
+            echo '
+                <div class="alert alert-info">'.$notif.'</div>
+            ';
+        }
+    ?>
 	<div class="row">
 		<div class="col-lg-12">
             <div class="panel panel-default">
@@ -21,7 +29,7 @@
     <div class="modal fade" id="modal_add" tabindex="-1" role="dialog" aria-labelledby="modal_addLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
         <div class="modal-dialog">
             <div class="modal-content">
-                <form action="<?php echo base_url('surat/tambah_surat_masuk'); ?>" method="post" enctype="multipart/form-data">
+                <form action="<?php echo base_url(); ?>index.php/surat/tambah_surat_masuk" method="post" enctype="multipart/form-data">
                     <div class="modal-header">
                         <h4 class="modal-title" id="modal_addLabel">Tambah Surat Masuk</h4>
                     </div>
