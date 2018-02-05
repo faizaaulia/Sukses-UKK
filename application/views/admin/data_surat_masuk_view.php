@@ -19,6 +19,45 @@
                     <a href="#" class="btn btn-success btn-sm" data-toggle="modal" data-target="#modal_add"><span class="fa fa-plus"></span> Tambah Surat</a>
                 </div>
                 <!-- /.panel-heading -->
+                <div class="panel-body">
+                    <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
+                            <thead>
+                                <tr>
+                                    <th>NO</th>
+                                    <th>NO.SURAT</th>
+                                    <th>PENGIRIM</th>
+                                    <th>TGL.KIRIM</th>
+                                    <th>TGL.TERIMA</th>
+                                    <th>PERIHAL</th>
+                                    <th>AKSI</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                    $no = 0;
+                                    foreach ($surat_masuk as $masuk) {
+                                        echo '
+                                            <tr>
+                                                <td>'.++$no.'</td>
+                                                <td>'.$masuk->nomor_surat.'</td>
+                                                <td>'.$masuk->pengirim.'</td>
+                                                <td>'.$masuk->tgl_kirim.'</td>
+                                                <td>'.$masuk->tgl_terima.'</td>
+                                                <td>'.$masuk->perihal.'</td>
+                                                <td>
+                                                    <a href="'.base_url('uploads/'.$masuk->file_surat).'" class="btn btn-info btn-sm" target="_blank">Lihat</a>
+                                                    <a href="#" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modal_ubah" onclick="prepare_update_surat('.$masuk->id_surat.')">Ubah</a>
+                                                    <a href="#" class="btn btn-success btn-sm" data-toggle="modal" data-target="#modal_ubah_surat" onclick="prepare_update_surat('.$masuk->id_surat.')">Ubah Surat</a>
+                                                    <a href="'.base_url('surat/disposisi/'. $masuk->id_surat).'" class="btn btn-primary btn-sm">Disposisi</a>
+                                                    <a href="'.base_url('surat/hapus_surat_masuk/'.$masuk->id_surat).'" class="btn btn-danger btn-sm">Hapus</a>
+                                                </td>
+                                            </tr>
+                                        ';
+                                    }
+                                ?>
+                            </tbody>
+                        </table>
+                </div>
             </div>
             <!-- /.panel -->
         </div>
