@@ -17,6 +17,8 @@
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <a href="#" class="btn btn-success btn-sm" data-toggle="modal" data-target="#modal_add"><span class="fa fa-plus"></span> Tambah Disposisi</a>
+                    <span>No. Surat: </span>
+                    <label class="label label-default"><?php echo $data_surat->nomor_surat ?></label>
                 </div>
                 <!-- /.panel-heading -->
                 <div class="panel-body">
@@ -27,6 +29,7 @@
                                     <th>PENGIRIM</th>
                                     <th>NAMA</th>
                                     <th>TGL.DISPOSISI</th>
+                                    <th>CATATAN</th>
                                     <th>KETERANGAN</th>
                                     <th>AKSI</th>
                                 </tr>
@@ -42,6 +45,13 @@
                                                 <td>'.$disposisi->nama.'</td>
                                                 <td>'.$disposisi->tgl_disposisi.'</td>
                                                 <td>'.$disposisi->keterangan.'</td>
+                                                ';
+                                                if ($disposisi->id_pegawai_pengirim == $this->session->userdata('id_pegawai')) {
+                                                    echo '<td><label class="label label-warning">Disposisi Keluar</label></td>';
+                                                } else {
+                                                    echo '<td><label class="label label-info">Disposisi Masuk</label></td>';
+                                                }
+                                                echo '
                                                 <td>
                                                     <a href="'.base_url('uploads/'.$disposisi->file_surat).'" class="btn btn-info btn-sm" target="_blank">Lihat</a>
                                                 </td>
