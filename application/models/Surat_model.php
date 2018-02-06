@@ -86,6 +86,16 @@ class Surat_model extends CI_Model {
 		}
 	}
 
+	public function get_all_disposisi_masuk($id_pegawai_penerima)
+	{
+		return $this->db->join('disposisi', 'disposisi.id_surat = surat_masuk.id_surat')
+						->join('pegawai', 'pegawai.id_pegawai = disposisi.id_pegawai_pengirim')
+						->join('jabatan', 'jabatan.id_jabatan = pegawai.id_jabatan')
+						->where('id_pegawai_penerima', $id_pegawai_penerima)
+						->get('surat_masuk')
+						->result();
+	}
+
 }
 
 /* End of file Surat_model.php */

@@ -20,6 +20,7 @@ class Surat extends CI_Controller {
 			} else {
 				$data['main_view'] = 'pegawai/dashboard_view';
 				$data['title'] = "Dashboard Pegawai | SISurat";
+				$data['data_disposisi'] = $this->surat_model->get_all_disposisi_masuk($this->session->userdata('id_pegawai'));
 				$this->load->view('template_view', $data);
 			}
 		} else {
@@ -139,6 +140,21 @@ class Surat extends CI_Controller {
 			}
 		} else {
 			redirect('login');
+		}
+	}
+
+	public function disposisi_keluar($id_surat)
+	{
+		if ($this->session->userdata('logged_in') == TRUE) {
+			$data['main_view'] = 'pegawai/disposisi_keluar_view';
+			$data['title'] = 'Disposisi Keluar';
+			$data['data_surat'] = $this->surat_model->get_surat_masuk_by_id($this->uri->segment(3));
+			$data['jabatan'] = $this->surat_model->get_jabatan();
+			$data['data_disposisi'] = $this->surat_model->get_all_disposisi($id_surat);
+
+			$this->load->view('template_view', $data);
+		} else {
+			redirect('/');
 		}
 	}
 
