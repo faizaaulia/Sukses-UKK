@@ -25,7 +25,7 @@ class User_model extends CI_Model {
 				'nama_pegawai'	=>  $data_pegawai->nama_pegawai,
 				'id_jabatan'	=>	$data_pegawai->id_jabatan,
 				'jabatan'		=>	$data_pegawai->nama_jabatan,
-				'level'			=> $data_pegawai->level
+				'level'			=>  $data_pegawai->level
 			);
 
 			$this->session->set_userdata($session);

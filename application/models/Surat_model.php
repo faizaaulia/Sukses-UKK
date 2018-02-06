@@ -40,6 +40,52 @@ class Surat_model extends CI_Model {
 						->result();
 	}
 
+	public function get_surat_masuk_by_id($id_surat)
+	{
+		return $this->db->where('id_surat', $id_surat)
+						->get('surat_masuk')
+						->row();
+	}
+
+	public function get_jabatan()
+	{
+		return $this->db->get('jabatan')
+						->result();
+	}
+
+	public function get_pegawai_by_jabatan($id_jabatan)
+	{
+		return $this->db->where('id_jabatan', $id_jabatan)
+						->get('pegawai')
+						->result();	
+	}
+
+	public function get_all_disposisi($id_surat)
+	{
+		return $this->db->join('disposisi', 'disposisi.id_surat = surat_masuk.id_surat')
+						->join('pegawai', 'disposisi.id_pegawai_pengirim = pegawai.id_pegawai')
+						->join('jabatan', 'pegawai.id_jabatan = jabatan.id_jabatan')
+						->where('disposisi.id_surat', $id_surat)
+						->get('surat_masuk')
+						->result();
+	}
+
+	public function tambah_disposisi($id_surat)
+	{
+		$data = array(
+			'id_surat' => $id_surat,
+			'id_pegawai_pengirim' => $this->session->userdata('id_pegawai'),
+			'id_pegawai_penerima' => $this->input->post('tujuan_pegawai'),
+			'keterangan' => $this->input->post('keterangan')
+		);
+		$this->db->insert('disposisi', $data);
+		if ($this->db->affected_rows() > 0) {
+			return TRUE;
+		} else {
+			return FALSE;
+		}
+	}
+
 }
 
 /* End of file Surat_model.php */

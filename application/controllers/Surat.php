@@ -80,6 +80,68 @@ class Surat extends CI_Controller {
 		}
 	}
 
+	public function disposisi($id_surat)
+	{
+		if ($this->session->userdata('logged_in') == TRUE) {
+			if ($this->session->userdata('jabatan') == "Sekretaris") {
+				$data['main_view'] = 'admin/disposisi_sekretaris_view';
+				$data['title'] = "Tambah Disposisi Surat";
+				$data['data_surat'] = $this->surat_model->get_surat_masuk_by_id($this->uri->segment(3));
+				$data['jabatan'] = $this->surat_model->get_jabatan();
+				$data['data_disposisi'] = $this->surat_model->get_all_disposisi($id_surat);
+
+				$this->load->view('template_view', $data);	
+			}
+		} else {
+			redirect("/");
+		}
+	}
+
+	public function get_pegawai_by_jabatan($id_jabatan)
+	{
+		if ($this->session->userdata('logged_in') == TRUE) {
+			$data_pegawai = $this->surat_model->get_pegawai_by_jabatan($id_jabatan);
+			echo json_encode($data_pegawai);
+		} else {
+			redirect('/');
+		}
+	}
+
+	public function tambah_disposisi()
+	{
+		if($this->session->userdata('logged_in') == TRUE){
+			$this->form_validation->set_rules('tujuan_pegawai', 'Tujuan Pegawai', 'trim|required');
+			$this->form_validation->set_rules('keterangan', 'Keterangan', 'trim|required');
+
+			if ($this->form_validation->run() == TRUE) {
+				if($this->surat_model->tambah_disposisi($this->uri->segment(3)) == TRUE ){
+					$this->session->set_flashdata('notif', 'Tambah disposisi berhasil!');
+					if($this->session->userdata('jabatan') == 'Sekretaris'){
+						redirect('surat/disposisi/'.$this->uri->segment(3));
+					} else {
+						redirect('surat/disposisi_keluar/'.$this->uri->segment(3));
+					}			
+				} else {
+					$this->session->set_flashdata('notif', 'Tambah disposisi gagal!');
+					if($this->session->userdata('jabatan') == 'Sekretaris'){
+						redirect('surat/disposisi/'.$this->uri->segment(3));
+					} else {
+						redirect('surat/disposisi_keluar/'.$this->uri->segment(3));
+					}		
+				}
+			} else {
+				$this->session->set_flashdata('notif', validation_errors());
+				if($this->session->userdata('jabatan') == 'Sekretaris'){
+					redirect('surat/disposisi/'.$this->uri->segment(3));
+				} else {
+					redirect('surat/disposisi_keluar/'.$this->uri->segment(3));
+				}			
+			}
+		} else {
+			redirect('login');
+		}
+	}
+
 }
 
 /* End of file Surat.php */
