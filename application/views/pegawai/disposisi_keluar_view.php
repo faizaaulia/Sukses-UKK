@@ -42,7 +42,7 @@
                                             <tr>
                                                 <td>'.++$no.'</td>
                                                 <td>'.$disposisi->nama_jabatan.'</td>
-                                                <td>'.$disposisi->nama.'</td>
+                                                <td>'.$disposisi->nama_pegawai.'</td>
                                                 <td>'.$disposisi->tgl_disposisi.'</td>
                                                 <td>'.$disposisi->keterangan.'</td>
                                                 ';

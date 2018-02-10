@@ -63,12 +63,22 @@ class Surat_model extends CI_Model {
 	public function get_all_disposisi($id_surat)
 	{
 		return $this->db->join('disposisi', 'disposisi.id_surat = surat_masuk.id_surat')
-						->join('pegawai', 'disposisi.id_pegawai_pengirim = pegawai.id_pegawai')
-						->join('jabatan', 'pegawai.id_jabatan = jabatan.id_jabatan')
+						->join('pegawai', 'disposisi.id_pegawai_penerima = pegawai.id_pegawai')
+						->join('jabatan', 'disposisi.id_pegawai_pengirim = jabatan.id_jabatan')
 						->where('disposisi.id_surat', $id_surat)
 						->get('surat_masuk')
 						->result();
 	}
+
+	/*public function get_all_disposisi_penerima($id_surat)
+	{
+		return $this->db->join('disposisi', 'disposisi.id_surat = surat_masuk.id_surat')
+						->join('pegawai', 'disposisi.id_pegawai_penerima = pegawai.id_pegawai')
+						->join('jabatan', 'pegawai.id_jabatan = jabatan.id_jabatan')
+						->where('disposisi.id_surat', $id_surat)
+						->get('surat_masuk')
+						->result();
+	}*/
 
 	public function tambah_disposisi($id_surat)
 	{

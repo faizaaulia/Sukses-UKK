@@ -90,6 +90,7 @@ class Surat extends CI_Controller {
 				$data['data_surat'] = $this->surat_model->get_surat_masuk_by_id($this->uri->segment(3));
 				$data['jabatan'] = $this->surat_model->get_jabatan();
 				$data['data_disposisi'] = $this->surat_model->get_all_disposisi($id_surat);
+				// $data['data_penerima'] = $this->surat_model->get_all_disposisi_penerima($id_surat);
 
 				$this->load->view('template_view', $data);	
 			}

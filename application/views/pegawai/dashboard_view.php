@@ -42,7 +42,7 @@
                                                 <td>'.++$no.'</td>
                                                 <td>'.$masuk->nomor_surat.'</td>
                                                 <td>'.$masuk->nama_jabatan.'</td>
-                                                <td>'.$masuk->nama.'</td>
+                                                <td>'.$masuk->nama_pegawai.'</td>
                                                 <td>'.$masuk->tgl_disposisi.'</td>
                                                 <td>'.$masuk->keterangan.'</td>
                                                 ';

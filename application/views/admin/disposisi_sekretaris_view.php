@@ -25,10 +25,11 @@
                                 <tr>
                                     <th>NO</th>
                                     <th>PENGIRIM</th>
-                                    <th>NAMA</th>
+                                    <th>TUJUAN</th>
                                     <th>TGL.DISPOSISI</th>
                                     <th>KETERANGAN</th>
                                     <th>AKSI</th>
+                                    <!-- <th>TUJUAN</th> -->
                                 </tr>
                             </thead>
                             <tbody>
@@ -39,7 +40,7 @@
                                             <tr>
                                                 <td>'.++$no.'</td>
                                                 <td>'.$disposisi->nama_jabatan.'</td>
-                                                <td>'.$disposisi->nama.'</td>
+                                                <td>'.$disposisi->nama_pegawai.'</td>
                                                 <td>'.$disposisi->tgl_disposisi.'</td>
                                                 <td>'.$disposisi->keterangan.'</td>
                                                 <td>
@@ -48,6 +49,12 @@
                                             </tr>
                                         ';
                                     }
+                                    /*foreach ($data_penerima as $penerima) {
+                                        echo '
+                                                <td>'.$penerima->nama.'</td>
+                                            </tr>
+                                        ';
+                                    }*/
                                 ?>
                             </tbody>
                         </table>
@@ -108,7 +115,7 @@
         $('#tujuan_pegawai').empty();
         $.getJSON('<?php echo base_url(); ?>index.php/surat/get_pegawai_by_jabatan/'+id_jabatan,function(data){
             $.each(data, function(index, value){
-                $('#tujuan_pegawai').append('<option value="'+value.id_pegawai+'">'+value.nama+'</option>');
+                $('#tujuan_pegawai').append('<option value="'+value.id_pegawai+'">'+value.nama_pegawai+'</option>');
             })
         });
     }

@@ -13,7 +13,7 @@ class User_model extends CI_Model {
 	{
 		$query = $this->db->join('jabatan','jabatan.id_jabatan = pegawai.id_jabatan')
 						  ->where('nik', $this->input->post('nik'))
-				 		  ->where('password', md5($this->input->post('password')))
+				 		  ->where('password', $this->input->post('password'))
 				 		  ->get('pegawai');
 
 		if($query->num_rows() == 1){

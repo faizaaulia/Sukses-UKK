@@ -48,7 +48,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html">SB Admin v2.0 | <?php echo $this->session->userdata('jabatan'); ?></a>
+                <a class="navbar-brand" href="index.html">SB Admin v2.0 | <?php echo $this->session->userdata('nama_jabatan'); ?></a>
             </div>
             <!-- /.navbar-header -->
 
